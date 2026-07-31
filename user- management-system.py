@@ -1,13 +1,6 @@
 #================ USER MANAGEMENT SYSTEM ==================
 print("Welcome to user registration!")
-look_user = {
-    "username": {
-        "fullname", 
-        "age",
-        "email",
-        "password",
-        }
-}
+look_user = {}
 def show_menu():
     print("""
     Menu options:
@@ -31,7 +24,7 @@ def register_user():
         "fullname": fullname,
         "age": age,
         "email": email,
-        "password": password,
+        "password": password
     }
     print(look_user)
 def login_user():
