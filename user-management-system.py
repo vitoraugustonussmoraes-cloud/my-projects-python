@@ -15,11 +15,45 @@ def show_menu():
     menuoption = input("Select: ")
     return menuoption
 def register_user():
-    username = (input("Tapy your username: "))
+    while True:
+        username = (input("Type your username: "))
+        if username in look_user:
+            print("This username is in use")
+            continue
+        break
     fullname = (input("What's your full name? "))
-    age = (input("How old are you? "))
-    email = (input("What's your e-mail? "))
-    password = (input("Write a safe password: "))
+    while True:
+        age = int(input("How old are you? "))
+        if not 14 <= age <= 120:
+            print("Type you real age")
+            continue
+        break
+    while True:
+        email = (input("What's your e-mail? "))
+        if "@" not in email:
+            print("This email is not valid")
+            continue
+        break 
+    while True:
+        password = (input("Write a safe password: "))
+        min = len(password)
+        if min >= 8:
+            if not any(char.isalpha() for char in password):
+                print("Your password needs to have 8 characters, 1 letter and 1 number")
+                continue
+            if not any(char.isdigit() for char in password):
+                print("Your password needs to have 8 characters, 1 letter and 1 number")
+                continue
+            confirm = input("Confirm your password: ")
+            if password == confirm:
+                print("Acepted password!")
+            else:
+                print("Invalid password")
+                continue
+        else:
+            print("Your password needs to have 8 characters, 1 letter and 1 number")
+            continue
+        break
     look_user[username] = {
         "fullname": fullname,
         "age": age,
@@ -30,14 +64,14 @@ def register_user():
 def login_user():
     username = input("Type your username: ")
     if username in look_user:
-        password = input("Tapy your password: ")
+        password = input("Type your password: ")
         if password == look_user[username]["password"]:
             print(f"Welcome {username}!")
         else:
             print("Incorrect password")
             return
     else: 
-        print("Username not found")
+        print("Username was not found")
         return
 def list_user():
     if not look_user:
@@ -53,7 +87,7 @@ def search_user():
         print(f"Age: {look_user[username]['age']}")
         print(f"Email: {look_user[username]['email'] }") 
     else:
-        print("User not found...")
+        print("User was not found")
 def edit_user():
     username = input("Type the username you want to edit: ")
     if username in look_user:
@@ -61,7 +95,7 @@ def edit_user():
         1 - Full name
         2 - Age
         3 - Email
-        4 - Password
+        4 - Password tapy
         """)
         if edit == "1":
             newfullname = input("Type the new full name: ")
@@ -70,12 +104,12 @@ def edit_user():
             newage = input("Type the new age: ")
             look_user[username]['age'] = newage
         elif edit == "3":
-            newemail = input("Tapy your new email: ")   
+            newemail = input("Type your new email: ")   
             look_user[username]['email'] = newemail
         elif edit == "4":
-            probablypassword = input("For edit your password, type the actual password: ")
+            probablypassword = input("To edit your password, type the actual password: ")
             if probablypassword == look_user[username]['password']:
-                newpassword = input("Tapy your new password: ")
+                newpassword = input("Type your new password: ")
                 look_user[username]['password'] = newpassword
             else:
                 print("Password Invalid")
@@ -108,7 +142,7 @@ while True:
     elif menuoption == "6":
         delete_user()
     elif menuoption == "7":
-        break
+        exit()
     else:
-        ("This option is not valid")
+        print("This option is not valid")
         break
