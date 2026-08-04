@@ -40,7 +40,11 @@ def login_user():
         print("Username not found")
         return
 def list_user():
-    print(look_user)
+    if not look_user:
+        print("There are no users registed")
+        return
+    for username in look_user:
+        print(username)
 def search_user():
     username = input("Type the username you want to find: ")
     if username in look_user:
@@ -51,7 +55,7 @@ def search_user():
     else:
         print("User not found...")
 def edit_user():
-    username = input("Type the username you want to edit")
+    username = input("Type the username you want to edit: ")
     if username in look_user:
         edit = input("""What do you want to edit?: 
         1 - Full name
@@ -78,7 +82,7 @@ def edit_user():
         else: 
             print("Option is not valid")
     else:
-        print("Press ENTER to return to the menu")
+        print("User was not found")
 def delete_user():
     username = input("Type the username of user you want to delete: ")
     if username in (look_user):
@@ -87,6 +91,8 @@ def delete_user():
             del look_user[username]
         else:
             print("Press ENTER to return to the menu")
+    else:
+        print("User was not found")
 while True:
     menuoption = show_menu()
     if menuoption == "1":
